@@ -1,10 +1,13 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 // import test from "./controllers/test.js";
 import routes from "./routes/routes.js";
-import routesAssignment from "./routes/route-assignment.js";
+import vehicle from "./routes/vehicles.js";
+import roleAssignment from "./routes/role-assignment.js";
+import user from "./routes/users.js";
+import createUser from "./controllers/usercontro.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 const connectMongo = () => {
@@ -21,10 +24,12 @@ const connectMongo = () => {
 const app = express();
 app.use(cors());
 
+app.use("/api/v2/vehicles", vehicle);
 app.use("/api/v2/routes", routes);
-app.use("/api/v2/assign", routesAssignment);
+app.use("/api/v2/role", roleAssignment);
 
-app.use("/api/v2", createUser);
+app.use("/api/v2", user);
+// app.use("/server", user);
 
 const port = 5000;
 

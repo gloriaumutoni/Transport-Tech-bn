@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const routesModel = new mongoose.Schema({
   origin: {
     type: String,
-    required: "Please provide from",
+    required: "Please provide where from",
   },
   destination: {
     type: String,
-    required: "Please provide to",
+    required: "Please provide where to",
   },
 });
 
