@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import createUser from "./controllers/usercontro.js";
+import routes from "./routes/routes.js";
 
 dotenv.config();
 const connectMongo = () => {
@@ -20,8 +21,9 @@ const app = express();
 app.use(cors());
 
 app.use("/api/v2", createUser);
+app.use("/server",routes );
 
-const port = 3000;
+const port = 3100;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
