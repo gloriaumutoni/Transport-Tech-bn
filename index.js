@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import test from "./controllers/test.js";
+import routes from "./routes/routes.js";
+import routesAssignment from "./routes/route-assignment.js";
 
 dotenv.config();
 const connectMongo = () => {
   mongoose
-    .connect(process.env.MONGODBLINK)
+    .connect(process.env.MONGODB_LINK)
     .then(() => {
       console.log("Database Connected successfully");
     })
@@ -20,8 +22,10 @@ const app = express();
 app.use(cors());
 
 app.get("/api/v1", test);
+app.use("/api/v1/routes", routes);
+app.use("/api/v1/assign", routesAssignment);
 
-const port = 3000;
+const port = 5000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
