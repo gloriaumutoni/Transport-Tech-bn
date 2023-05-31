@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import test from "./controllers/test.js";
+// import test from "./controllers/test.js";
 import routes from "./routes/routes.js";
 import routesAssignment from "./routes/route-assignment.js";
 
@@ -21,9 +21,10 @@ const connectMongo = () => {
 const app = express();
 app.use(cors());
 
-app.get("/api/v1", test);
-app.use("/api/v1/routes", routes);
-app.use("/api/v1/assign", routesAssignment);
+app.use("/api/v2/routes", routes);
+app.use("/api/v2/assign", routesAssignment);
+
+app.use("/api/v2", createUser);
 
 const port = 5000;
 
