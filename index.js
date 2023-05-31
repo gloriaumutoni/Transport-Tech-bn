@@ -2,12 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import test from "./controllers/test.js";
+import createUser from "./controllers/usercontro.js";
 
 dotenv.config();
 const connectMongo = () => {
   mongoose
-    .connect(process.env.MONGODBLINK)
+    .connect(process.env.MONGODB_LINK)
     .then(() => {
       console.log("Database Connected successfully");
     })
@@ -19,7 +19,7 @@ const connectMongo = () => {
 const app = express();
 app.use(cors());
 
-app.get("/api/v1", test);
+app.use("/api/v2", createUser);
 
 const port = 3000;
 
