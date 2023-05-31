@@ -1,21 +1,15 @@
-import express from 'express'
-
-
-import userModel from "../models/user.js";
-
-
+import express from "express";
+// import userModel from "../models/user.js";
 
 //create route
 const assignRoute = async (req, res) => {
   const data = req.body;
-    let id = req.query.id
+  let id = req.query.id;
   try {
-   
-    const savedRoute = await accountSchema.findOne({ _id: data.id  });
-   
+    const savedRoute = await accountSchema.findOne({ _id: data.id });
+
     const response = new routesModel({
       routes: data.push.route,
-         
     });
     const route = await response.save();
     res.json({
@@ -32,3 +26,5 @@ const assignRoute = async (req, res) => {
     });
   }
 };
+
+export { assignRoute };

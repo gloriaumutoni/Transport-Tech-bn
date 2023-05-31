@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 const routesModel = new mongoose.Schema({
-  From: {
+  Origin: {
     type: String,
-    required: true,
+    required: "Please provide from",
   },
-  To: {
+  Destination: {
     type: String,
-    required: true,
-  }
+    required: "Please provide to",
+  },
 });
 
 export default mongoose.model("routes", routesModel);

@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
+  "bin": {
+    ".env": "./.env.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node index.js",
-    "compile": "babel-node index.js",
+    "start": "node index.js",
+    "compile": "node index.js",
     "dev": "nodemon --exec npm run start"
   },
   "repository": {
@@ -14,7 +18,7 @@
     "url": "git+https://github.com/Igire-Rwanda/Transport-tech-bn.git"
   },
   "keywords": [],
-  "author": "Tekcode",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Igire-Rwanda/Transport-tech-bn/issues"
