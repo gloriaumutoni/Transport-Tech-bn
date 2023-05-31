@@ -2,9 +2,9 @@ import routesModel from "../models/routes.js";
 
 //create route
 const createRoute = async (req, res) => {
-  const data = req.body;
-
   try {
+    const data = req.body;
+
     // const savedRoute = await routesModel.findOne({
     //   Destination: data.Destination,
     // });
@@ -15,10 +15,7 @@ const createRoute = async (req, res) => {
     // }
     //else
 
-    const newRoute = new routesModel({
-      Origin: data.Origin,
-      Destination: data.Destination,
-    });
+    const newRoute = new routesModel(data);
 
     const response = await newRoute.save();
     return res.status(200).json({
@@ -26,18 +23,6 @@ const createRoute = async (req, res) => {
       data: response,
       error: null,
     });
-
-    // const newRoute = new routesModel({
-    //   From: data.From,
-    //   To: data.To,
-    // });
-    // const saved = await newRoute.save();
-
-    // res.status(201).json({
-    //   message: "route successfully",
-    //   data: saved,
-    //   error: null,
-    // });
   } catch (error) {
     console.log("Error occured  ", error);
     res.status(500).json({

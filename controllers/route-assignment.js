@@ -6,7 +6,7 @@ const assignRoute = async (req, res) => {
   const data = req.body;
   let id = req.query.id;
   try {
-    const savedRoute = await accountSchema.findOne({ _id: data.id });
+    // const savedRoute = await userModel.findOne({ _id: data.id });
 
     const response = new routesModel({
       routes: data.push.route,
