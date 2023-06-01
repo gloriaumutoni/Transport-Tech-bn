@@ -1,4 +1,4 @@
-import gpsModel from "../models/gpsModel";
+import gpsModel from "../models/gpsModel.js";
 
 
 const createGps = async (req, res) => {
