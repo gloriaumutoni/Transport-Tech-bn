@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
         //const data = req.body;
         //console.log("data", data)
         let userInstance = new usermodel({
-            email: "email@gmail.com",
+            email: "marquise@gmail.com",
 
         });
 

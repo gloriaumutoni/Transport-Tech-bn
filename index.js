@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import createUser from "./controllers/usercontro.js";
 import routes from "./routes/users.js";
+import createGps from "./controllers/gpsController.js";
 
 dotenv.config();
 const connectMongo = () => {
@@ -18,10 +19,12 @@ const connectMongo = () => {
 };
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 app.use("/api/v2", createUser);
-app.use("/server",routes );
+app.use("/server", routes);
+app.use("/gps2", createGps);
 
 const port = 3100;
 
