@@ -8,10 +8,12 @@ import routes from "./routes/routes.js";
 import vehicle from "./routes/vehicles.js";
 import roleAssignment from "./routes/role-assignment.js";
 import user from "./routes/users.js";
+
 import createUser from "./controllers/usercontro.js";
 import createGps from "./controllers/gpsController.js";
-import mongoose from "mongoose";
 
+import mongoose from "mongoose";
+import messageRoutes from "./routes/messageRoutes.js";
 
 dotenv.config();
 const connectMongo = () => {
@@ -35,11 +37,16 @@ app.use("/api/v2/role", roleAssignment);
 
 app.use("/api/v2", user);
 // app.use("/server", user);
+
+
+app.use('/messages', messageRoutes);
+
 app.use("/api/v2", createUser);
 // app.use("/server", routes);
 app.use("/gps2", createGps);
 
-const port = 5000;
+
+const port = 6000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
