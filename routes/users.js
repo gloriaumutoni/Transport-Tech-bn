@@ -1,10 +1,17 @@
-import bodyParser from "body-parser";
 import express from "express";
-import createUser from "../controllers/usercontro";
+import login from "../controllers/login.js"
+import signup from "../controllers/signup.js"
+
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser"
 
 const router = express.Router();
 router.use(bodyParser.json());
+router.use(cookieParser())
+router.post("/signup",signup)
 
-router.post("/user", createUser);
 
-export default router
+router.post("/login",login)
+
+
+export default router;

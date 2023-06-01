@@ -7,42 +7,30 @@ console.log("welcome");
 const signInController = async (req, res) => {
   try {
     const data = req.body;
-    const check = await SignUp.findOne({ email: data.email });
-    const pass = data.password;
+    const { email, password } = data; 
     let token;
 
-    if (check) {
-      const isPasswordValid = await bcrypt.compare(pass, check.password);
+    const user = await SignUp.findOne({ email });
+
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (isPasswordValid) {
-        token = jwt.sign({ id: check._id }, "yourSecretKey");
-        res.send(token);
+        token = jwt.sign({ id: user._id }, "yourSecretKey");
+        res.status(200).json({
+          message: "token is",
+        token:token
+        });
+        
       } else {
         res.send("Your password is wrong");
         return;
       }
     } else {
-      const hashedPassword = await bcrypt.hash(pass, 10);
-      const signInstance = new SignUp({
-        email: data.email,
-        password: hashedPassword,
+      res.status(401).json({
+        message: "Email not registered. Please sign up.",
       });
-
-      token = jwt.sign({ id: signInstance._id }, "yourSecretKey");
-      signInstance.token = token;
-      signInstance.password = undefined;
-      const options = {
-        expire: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-      };
-
-      await signInstance.save();
-
-      res.status(200).cookie("token", token, options).json({
-        message: true,
-        token,
-        user: signInstance,
-      });
+      return;
     }
   } catch (err) {
     console.log("Error caught:", err);

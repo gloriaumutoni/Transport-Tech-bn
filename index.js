@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import createUser from "./controllers/usercontro.js";
-import routes from "./routes/routes.js";
+import routes from "./routes/users.js";
 
 dotenv.config();
 const connectMongo = () => {
