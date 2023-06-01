@@ -6,35 +6,35 @@ const register = async (req, res) => {
     const data = req.body;
     const salt = await bcrypt.genSalt(7);
 
-    const check = await signup.findOne({ email: data.email });
-    const hashpaword = await bcrypt.hash(data.password, salt);
-    data.password = hashpaword;
-    // res.send(data);
-    if (check) {
+    let existingUser = await signup.findOne({ email: data.email });
+    if (existingUser) {
       return res.status(409).json({
-        message: "user already in our database",
-      });
-    } else {
-      let registerInstance = new signup({
-        userName: data.userName,
-        email: data.email,
-        password: data.password,
-      });
-
-      let result = await registerInstance.save();
-
-      res.status(200).json({
-        message: "data saved successfully",
-        error: null,
-        data: result,
+        message: "Email is already registered",
       });
     }
+
+    const hashedPassword = await bcrypt.hash(data.password, salt);
+    data.password = hashedPassword;
+
+    let registerInstance = new signup({
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
+    });
+
+    let result = await registerInstance.save();
+
+    res.status(200).json({
+      message: "Data saved successfully",
+      error: null,
+      data: result,
+    });
   } catch (err) {
-    console.log("error catched");
+    console.log("Error caught:", err);
     res.status(500).json({
-      message: "failed to save the data",
-      error: "failed",
+      message: "Failed to save the data",
+      error: "Failed",
     });
   }
-};
+}
 export default register;
