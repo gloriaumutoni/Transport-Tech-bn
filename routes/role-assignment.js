@@ -1,16 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
-
-import gpsModel from "../models/gpsModel";
-import GPS from "../controllers/gpsController.js";
-
+import { assignRole, getAllRoles } from "../controllers/role-assignment.js";
 
 const router = express.Router();
 router.use(bodyParser.json());
 
-
-router.post("/gps", gpsModel)
-router.post("/create", GPS);
-
+router.patch("/assign", assignRole);
+router.get("/readAll", getAllRoles);
 export default router;
-

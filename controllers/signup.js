@@ -1,6 +1,8 @@
 import signup from "../models/usermodel.js";
 import bcrypt from "bcrypt";
+
 import nodemailer from 'nodemailer';
+
 
 const register = async (req, res) => {
   try {
@@ -22,6 +24,7 @@ const register = async (req, res) => {
       email: data.email,
       password: data.password,
     });
+
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -66,6 +69,7 @@ const register = async (req, res) => {
       error: "Failed",
     });
   }
+
 };
 
 export default register;
