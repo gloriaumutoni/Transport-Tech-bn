@@ -36,5 +36,7 @@ const register = async (req, res) => {
       error: "Failed",
     });
   }
-}
+
+};
+
 export default register;

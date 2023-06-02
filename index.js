@@ -8,7 +8,13 @@ import booking from "./routes/booking-seats.js";
 import roleAssignment from "./routes/role-assignment.js";
 import user from "./routes/users.js";
 import createUser from "./controllers/usercontro.js";
+
 import createGps from "./routes/gpsRoutes.js";
+
+
+import routes from "./routes/users.js";
+
+
 import mongoose from "mongoose";
 import messageRoutes from "./routes/messageRoutes.js";
 
@@ -37,7 +43,9 @@ app.use("/api/v2/gps2", createGps);
 app.use("/api/v2/messages", messageRoutes);
 app.use("/api/v2/user", user);
 
+
 const port = 5000;
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
