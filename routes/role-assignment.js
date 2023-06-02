@@ -6,5 +6,5 @@ const router = express.Router();
 router.use(bodyParser.json());
 
 router.patch("/assign", assignRole);
-router.get("/get", getAllRoles);
+router.get("/readAll", getAllRoles);
 export default router;
