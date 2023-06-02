@@ -21,6 +21,7 @@ const register = async (req, res) => {
 
     let registerInstance = new signup({
       userName: data.userName,
+      role:data.role,
       email: data.email,
       password: data.password,
     });
@@ -38,9 +39,9 @@ const register = async (req, res) => {
     });
 
     var mailOptions = {
-      from: 'transportcode2023@gmail.com ',
+      from: 'DERIV RWANDA ',
       
-      to:' munyeshurimanzi@gmail.com',
+      to:data.email,
     
       subject: ' Acceptance of Software Developer Position at DERIV ',
       text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',

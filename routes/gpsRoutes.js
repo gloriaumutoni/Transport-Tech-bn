@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-import gpsModel from "../models/gpsModel";
+import gpsModel from "../models/gpsModel.js";
 import GPS from "../controllers/gpsController.js";
 
 
