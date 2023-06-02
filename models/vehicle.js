@@ -18,6 +18,11 @@ const vehicleModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  seats: {
+    type: Number,
+    required: true,
+    default: 30,
+  },
 });
 
 export default mongoose.model("Vehicles", vehicleModel);

@@ -1,4 +1,4 @@
-import SignUp from '../models/usermodel.js';
+import SignUp from "../models/usermodel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -7,7 +7,7 @@ console.log("welcome");
 const signInController = async (req, res) => {
   try {
     const data = req.body;
-    const { email, password } = data; 
+    const { email, password } = data;
     let token;
 
     const user = await SignUp.findOne({ email });
@@ -17,7 +17,11 @@ const signInController = async (req, res) => {
 
       if (isPasswordValid) {
         token = jwt.sign({ id: user._id }, "yourSecretKey");
-        res.send(token);
+        res.status(200).json({
+          Message: "User requested",
+          data: user,
+          Token: token,
+        });
       } else {
         res.send("Your password is wrong");
         return;
