@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geolocation</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Geo Mapping</h3>
+      <h1>Getting a persons location</h1>
+      <div id="loc"></div>
+    </div>
+
+    <script>
+      const loc = document.getElementById("loc");
+
+      if (!navigator.geolocation) {
+        console.log("Geolocation unavailable");
+      }
+
+      const success = (pos) => {
+        console.log("Geolocation success");
+        console.log(pos);
+        let latitude = pos.coords.latitude;
+        let longitude = pos.coords.longitude;
+        let altitude = pos.coords.altitude;
+        let speed = pos.coords.speed;
+        console.log(
+          `latitude ${latitude}`,
+          `Longitude ${longitude}`,
+          `Altitude ${altitude}`
+        );
+        loc.innerHTML = `Latitude: ${latitude} <br> Longitude: ${longitude} <br> Speeed: ${speed}`;
+        const show = `<a href="https://www.openstreetmap.org/#map=16/${latitude}/${longitude}"> Hello Click me</a>`;
+        // loc.innerHTML = show;
+      };
+      const error = () => {
+        console.log("Geolocation error");
+      };
+      const options = {};
+
+      navigator.geolocation.watchPosition(success, error, options);
+    </script>
+    //''''''''''''''''''''''''''''''''''''''''''''''
+    <script>
+      // import axios from "axios";
+
+      // let config = {
+      //   method: "get",
+      //   url: "https://api.geoapify.com/v1/geocode/reverse?lat=51.21709661403662&lon=6.7782883744862374&apiKey=1231f80672f240379c814fcfe6b423d9",
+      //   headers: {},
+      // };
+
+      // axios(config)
+      //   .then(function (response) {
+      //     console.log(response.data);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+
+      let lat = -1.9305915;
+      let long = 30.0746009;
+      let requestOptions = {
+        method: "GET",
+      };
+
+      fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${long}&format=json&apiKey=1231f80672f240379c814fcfe6b423d9`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    </script>
+    <script src="./controllers/geolocation.js"></script>
+  </body>
+</html>
