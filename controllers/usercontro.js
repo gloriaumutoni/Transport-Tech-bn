@@ -1,11 +1,13 @@
 import usermodel from "../models/usermodel.js";
 
 const createUser = async (req, res) => {
+
   try {
     //const data = req.body;
     //console.log("data", data)
     let userInstance = new usermodel({
-      email: "email@gmail.com",
+      email: "marquise@gmail.com",
+
     });
 
     console.log("data");
