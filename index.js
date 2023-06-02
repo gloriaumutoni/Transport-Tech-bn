@@ -18,6 +18,7 @@ import routes from "./routes/users.js";
 
 import mongoose from "mongoose";
 import messageRoutes from "./routes/messageRoutes.js";
+import registrationRouter from "./routes/registrationRouter.js";
 
 dotenv.config();
 const connectMongo = () => {
@@ -43,6 +44,19 @@ app.use("/api/v2/role", roleAssignment);
 app.use("/api/v2/gps2", createGps);
 app.use("/api/v2/messages", messageRoutes);
 app.use("/api/v2/user", user);
+
+
+app.use("/api/v2", user);
+// app.use("/server", user);
+
+
+app.use('/messages', messageRoutes);
+app.use('/register', registrationRouter);
+
+app.use("/api/v2", createUser);
+// app.use("/server", routes);
+app.use("/gps2", createGps);
+
 
 
 const port = 5000;
