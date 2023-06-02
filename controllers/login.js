@@ -1,4 +1,7 @@
+
+
 import SignUp from "../models/usermodel.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -7,6 +10,7 @@ console.log("welcome");
 const signInController = async (req, res) => {
   try {
     const data = req.body;
+
     const { email, password } = data;
     let token;
 
