@@ -17,7 +17,11 @@ const signInController = async (req, res) => {
 
       if (isPasswordValid) {
         token = jwt.sign({ id: user._id }, "yourSecretKey");
-        res.send(token);
+        res.status(200).json({
+          message: "token is",
+        token:token
+        });
+        
       } else {
         res.send("Your password is wrong");
         return;
