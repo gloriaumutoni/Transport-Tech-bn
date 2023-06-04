@@ -8,6 +8,7 @@ import booking from "./routes/booking-seats.js";
 import roleAssignment from "./routes/role-assignment.js";
 import user from "./routes/users.js";
 import createUser from "./controllers/usercontro.js";
+
 import routes from "./routes/users.js";
 
 import createGps from "./routes/gpsRoutes.js";
@@ -35,6 +36,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+<<<<<<< HEAD
 // app.use("/api/v2", user);
 app.use("/api/v2/vehicles", vehicle);
 app.use("/api/v2/booking", booking);
@@ -48,8 +50,22 @@ app.use("/api/v2/user", user);
 const port = 5000;
 
 
+=======
+app.use("/api/v2", createUser);
+
+app.use("/server",routes );
+
+const port = 4000;
+
+
+app.use("/gps2", createGps);
+
+
+
+
+>>>>>>> 42270af (remove simillar errors)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectMongo();
-});
+}); 

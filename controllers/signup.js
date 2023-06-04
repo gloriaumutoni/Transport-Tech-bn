@@ -40,7 +40,7 @@ const register = async (req, res) => {
     var mailOptions = {
       from: 'transportcode2023@gmail.com ',
       
-      to:'ishgatetechristian@gmail.com',
+      to:' munyeshurimanzi@gmail.com',
     
       subject: ' Acceptance of Software Developer Position at DERIV ',
       text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
