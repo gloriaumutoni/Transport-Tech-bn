@@ -8,12 +8,12 @@ import booking from "./routes/booking-seats.js";
 import roleAssignment from "./routes/role-assignment.js";
 import user from "./routes/users.js";
 import createUser from "./controllers/usercontro.js";
-import routes from "./routes/users.js";
+// import routes from "./routes/users.js";
 
 import createGps from "./routes/gpsRoutes.js";
 
 
-import routes from "./routes/users.js";
+// import routes from "./routes/users.js";
 
 
 import mongoose from "mongoose";
