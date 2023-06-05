@@ -8,8 +8,9 @@ import booking from "./routes/booking-seats.js";
 import roleAssignment from "./routes/role-assignment.js";
 import user from "./routes/users.js";
 import createUser from "./controllers/usercontro.js";
+import status from "./routes/actStatusRoute.js"
 
-import routes from "./routes/users.js";
+
 
 import createGps from "./controllers/gpsController.js";
 import mongoose from "mongoose";
@@ -36,6 +37,7 @@ app.use("/api/v2/vehicles", vehicle);
 app.use("/api/v2/booking", booking);
 app.use("/api/v2/routes", routes);
 app.use("/api/v2/role", roleAssignment);
+app.use("/api/v2/status", status);
 
 app.use("/api/v2", user);
 // app.use("/server", user);
@@ -45,7 +47,7 @@ app.use('/messages', messageRoutes);
 
 app.use("/api/v2", createUser);
 
-app.use("/server",routes );
+app.use("/server", routes);
 
 const port = 3100;
 
