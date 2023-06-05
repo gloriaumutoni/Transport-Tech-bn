@@ -14,6 +14,7 @@ import createUser from "./controllers/usercontro.js";
 import createGps from "./routes/gpsRoutes.js";
 
 
+
 // import routes from "./routes/users.js";
 
 
@@ -61,11 +62,12 @@ app.use("/gps2", createGps);
 
 
 
-const port = 5000;
+const port = 4000;
 
 
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectMongo();
+
 });
