@@ -18,9 +18,10 @@ const seatSchema = new Schema({
     required: true,
   },
   
-  isServed: {
+seatServed: {
     type: Boolean,
-    default: false,
+    default: true,
+    
   },
 });
 

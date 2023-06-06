@@ -10,7 +10,7 @@ export async function bookSeat(req, res) {
     // Check if the seat number is already booked
     const existingSeat = await Seat.findOne({ seatNumber });
     if (existingSeat) {
-      return res.status(400).json({ Failed : 'seat already served'   });
+      return res.status(400).json({ Driver : 'seat already served'   });
     }
 
     // Create a new seat booking
@@ -22,7 +22,7 @@ export async function bookSeat(req, res) {
     });
     await seat.save();
 
-    return res.json({ message: 'seat booked successfully' , data: seat  });
+    return res.json({ data: seat  });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal ,, server error' });
@@ -41,10 +41,10 @@ export async function markSeatAsServed(req, res) {
     }
 
     // Mark the seat as served
-    seat.isServed = true;
+    seat.seatServed = true;
     await seat.save();
 
-    return res.json({ message: ' ticket marked as served' });
+    return res.json({ message: ' seat marked as served' });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
