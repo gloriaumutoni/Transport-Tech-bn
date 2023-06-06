@@ -35,17 +35,23 @@ const assignRole = async (req, res) => {
 //get all roles
 const getAllRoles = async (req, res) => {
   try {
-    let userId = req.query.id;
-    let user = await userModel.findById(userId);
-    if (!user) {
-      return res.sendStatus(404);
+    let data = req.body;
+    let role = data.role;
+    //pass the role in the body 
+    let response = await userModel.find({ role: role });
+    if (response.length == 0) {
+      res.status(404).json({
+        message: "No data found",
+        data: response,
+        error: "No data found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Retrieved successfully",
+        data: response,
+        error: null,
+      });
     }
-    let roles = user.roles;
-    res.status(200).json({
-      message: "Roles Fetched Successfully",
-      data: roles,
-      error: null,
-    });
   } catch (error) {
     console.log("Error occurred: ", error);
     res.status(500).json({
