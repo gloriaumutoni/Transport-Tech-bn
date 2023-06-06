@@ -47,7 +47,7 @@ app.use("/api/v2/routes", routes);
 app.use("/api/v2/role", roleAssignment);
 app.use("/api/v2/status", status);
 app.use("/api/v2/gps2", createGps);
-app.use("/api/v2/messages", messageRoutes);
+app.use("/api/v2/message", messageRoutes);
 app.use("/api/v2/user", user);
 
 
@@ -62,7 +62,7 @@ app.use("/api/v2", createUser);
 
 app.use("/server", routes);
 
-const port = 3100;
+const port = 3000;
 
 
 app.use("/gps2", createGps);
