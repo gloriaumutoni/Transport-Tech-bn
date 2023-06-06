@@ -1,9 +1,13 @@
 // routes/messageRoutes.js
 
-import { Router } from 'express';
+import { Router } from "express";
 const router = Router();
-import messageController from '../controllers/messageController.js'
+import {
+  createMessage,
+  readAllMessages,
+} from "../controllers/messageController.js";
 
-router.post('/', messageController.createMessage);
+router.post("/", createMessage);
+router.get("/readAll", readAllMessages);
 
 export default router;
