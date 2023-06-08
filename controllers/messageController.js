@@ -1,6 +1,7 @@
 // controllers/messageController.js
 
 import messageModel from "../models/messageModol.js";
+import nodemailer from 'nodemailer';
 
 async function createMessage(req, res) {
   try {
@@ -8,8 +9,35 @@ async function createMessage(req, res) {
 
     const newMessage = new messageModel({ name, email, message });
 
-    await newMessage.save();
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'transportcode2023@gmail.com  ',
+        pass: ' hcycpozjyailjeiu',
+      },
+    });
 
+    var mailOptions = {
+      from: 'transportcode2023@gmail.com ',
+
+      to: email,
+
+      subject: ' Confirmation message ',
+      text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
+      html: '<b>Hey there! </b><br> hope this email finds you well. Thank you for your good idea',
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Message sent: %s', info.messageId);
+      }
+    });
+    await newMessage.save();
     res
       .status(200)
       .json({ message: "Message saved successfully", data: newMessage });
