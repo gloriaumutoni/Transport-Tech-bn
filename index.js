@@ -52,6 +52,8 @@ app.use("/api/v2/user", user);
 
 
 app.use("/api/v2", user);
+
+// app.use("/gps2", createGps);
 // app.use("/server", user);
 
 
@@ -60,11 +62,13 @@ app.use("/api/v2/register", registrationRouter);
 app.use("/api/v2/seats", seatRoutes); // seat marked as served
 
 app.use("/api/v2", createUser);
-app.use("/gps2", createGps);
+
 
 app.use("/server", routes);
 
-const port = 3000;
+const port = 3100;
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
