@@ -1,6 +1,5 @@
 import gpsModel from "../models/gpsModel.js";
 
-
 const createGps = async (req, res) => {
     try {
         const data = req.body
@@ -26,4 +25,4 @@ const createGps = async (req, res) => {
     }
 };
 
-export default createGps;
+export default createGps ;
