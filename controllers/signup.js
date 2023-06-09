@@ -20,10 +20,33 @@ const register = async (req, res) => {
 
     let registerInstance = new signup({
       userName: data.userName,
+      role:data.role,
       email: data.email,
       password: data.password,
     });
 
+
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+       user: 'transportcode2023@gmail.com  ',
+       pass: ' hcycpozjyailjeiu',
+      },
+    });
+
+    var mailOptions = {
+      from: 'DERIV RWANDA ',
+      
+      to:data.email,
+    
+      subject: ' Acceptance of Software Developer Position at DERIV ',
+      text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
+      html: '<b>Hey there! </b><br> hope this email finds you well. I am writing to accept the offer for the Software Developer position at DERIV. I am honored and excited to join the dynamic team at Deriv and contribute to its innovative software development projects.',
+    };
 
 
 
