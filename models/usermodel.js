@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
     required: false,
     default: "user",
   },
+  status: {
+    type: String,
+    required: false,
+    default: "Active",
+  }
 });
 
 export default mongoose.model("User", UserSchema);
