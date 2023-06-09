@@ -1,9 +1,7 @@
 import signup from "../models/usermodel.js";
 import bcrypt from "bcrypt";
-
+import emailSender from "./Emailsender.js";
 import nodemailer from 'nodemailer';
-
-
 const register = async (req, res) => {
   try {
     const data = req.body;
@@ -16,6 +14,7 @@ const register = async (req, res) => {
       });
     }
 
+
     const hashedPassword = await bcrypt.hash(data.password, salt);
     data.password = hashedPassword;
 
@@ -25,6 +24,7 @@ const register = async (req, res) => {
       email: data.email,
       password: data.password,
     });
+
 
 
     const transporter = nodemailer.createTransport({
@@ -48,16 +48,11 @@ const register = async (req, res) => {
       html: '<b>Hey there! </b><br> hope this email finds you well. I am writing to accept the offer for the Software Developer position at DERIV. I am honored and excited to join the dynamic team at Deriv and contribute to its innovative software development projects.',
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Message sent: %s', info.messageId);
-      }
-    });
+
 
     let result = await registerInstance.save();
-
+    const defaultMessage="<b>Hey there! </b><br> This email ,is to let you know that ,your account  have been created ."
+    emailSender(data.email,defaultMessage);
     res.status(200).json({
       message: "Data saved successfully",
       error: null,
