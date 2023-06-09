@@ -1,7 +1,4 @@
-
-
 import SignUp from "../models/usermodel.js";
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -20,7 +17,7 @@ const signInController = async (req, res) => {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (isPasswordValid) {
-        token = jwt.sign({ id: user._id }, "yourSecretKey");
+        token = jwt.sign({ id: user._id,email:data.email}, "yourSecretKey");
         res.status(200).json({
           message: "token is",
         token:token

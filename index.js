@@ -13,6 +13,7 @@ import createUser from "./controllers/usercontro.js";
 
 import status from "./routes/actStatusRoute.js"
 
+
 // import routes from "./routes/users.js";
 
 
@@ -73,4 +74,5 @@ const port = 3100;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectMongo();
+
 });
