@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
 
-
 const GpsSchema = new mongoose.Schema({
     longitude: {
         type: String,
@@ -13,4 +12,5 @@ const GpsSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Location", GpsSchema)
+export default mongoose.model("Location", GpsSchema);
+
