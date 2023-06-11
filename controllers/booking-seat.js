@@ -28,8 +28,8 @@ const createBooking = async (req, res) => {
       Vehicle ID: ${data.vehicleId}
       Destination: ${data.destination}
       model:${data.model}`;
-
-    emailSender(email, emailContent);
+const task="Booking seat Confirmation";
+    emailSender(email, emailContent,task);
 
     res.status(200).json({
       message: "Seat booking created successfully",
@@ -51,7 +51,8 @@ export default createBooking;
 //delete Booking
 const deleteBooking = async (req, res) => {
   try {
-    let bookingId = req.query.id;
+    let bookingId = req.params.id;
+    const { email } = req.user;
 
     let booking = await bookingSeatModel.find({ _id: bookingId });
     if (booking.length == 0) {
@@ -62,7 +63,8 @@ const deleteBooking = async (req, res) => {
       });
     } else {
       let deletionResult = await bookingSeatModel.deleteOne({ _id: bookingId });
-
+      const task="Delete Booked Seat Confirmation";
+      emailSender(email, deletionResult,task);
       return res.status(200).json({
         message: "Vehicle deleted successfully",
         data: deletionResult,
@@ -82,25 +84,31 @@ const deleteBooking = async (req, res) => {
 // //update Booking
 const changeBooking = async (req, res) => {
   try {
-    let bookingId = req.query.id;
+    let bookingId = req.params.id;
+    const { email } = req.user;
     let data = req.body;
-    let booking = await bookingSeatModel.findById(bookingId);
+    let booking = await bookingSeatModel.find({_id:bookingId});
 
-    if (!booking) {
-      return res.sendStatus(404);
+    if (booking.length==0) {
+      return res.status(404).json({
+        message:"Booked seat trying to update not found",
+        error:"Booked seat not found"
+      });
     }
-
+  else{
     let updatedBooking = await bookingSeatModel.findOneAndUpdate(
       { _id: bookingId },
       { $set: data },
-      { new: true } // To get the updated vehicle in the response
+     // To get the updated vehicle in the response
     );
-
+    const task="Changing Booked seat Confirmation";
+    emailSender(email, updatedBooking,task);
     return res.status(200).json({
-      message: "Book updated successfully",
+      message: "Booked seat updated successfully",
       data: updatedBooking,
       error: null,
     });
+  }
   } catch (error) {
     console.log("Error occurred: ", error);
     return res.status(500).json({

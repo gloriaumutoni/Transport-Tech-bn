@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-const emailSender=(email,message)=>{
+const emailSender=(email,message,task)=>{
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         host: 'smtp.gmail.com',
@@ -17,7 +17,7 @@ const emailSender=(email,message)=>{
         // to: "ishimwerichard26@gmail.com",
         to: `${email}`,
       
-        subject: ' Signup confirmation ',
+        subject: `${task}`,
         text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
         html: `${message}`,
       };
