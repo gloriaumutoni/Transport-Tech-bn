@@ -52,7 +52,8 @@ const register = async (req, res) => {
 
     let result = await registerInstance.save();
     const defaultMessage="<b>Hey there! </b><br> This email ,is to let you know that ,your account  have been created ."
-    emailSender(data.email,defaultMessage);
+    const task="Signup Confirmation";
+    emailSender(data.email,defaultMessage,task);
     res.status(200).json({
       message: "Data saved successfully",
       error: null,

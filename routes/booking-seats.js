@@ -14,8 +14,8 @@ router.use(bodyParser.json());
 router.use(cookieParser());
 
 router.post("/create",verifyToken, createBooking);
-router.patch("/change", changeBooking);
-router.delete("/delete", deleteBooking);
+router.patch("/change/:id",verifyToken, changeBooking);
+router.delete("/delete/:id",verifyToken, deleteBooking);
 
 //
 
