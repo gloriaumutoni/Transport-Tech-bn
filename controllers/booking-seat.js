@@ -1,10 +1,9 @@
 import bookingSeatModel from "../models/booking-seat.js";
-
-//book a seat
+import emailSender from './Emailsender.js';
 const createBooking = async (req, res) => {
   try {
     const data = req.body;
-
+    const { email } = req.user;
     const newBooking = new bookingSeatModel({
       seat: data.seat,
       booking_id: data.booking_id,
@@ -14,42 +13,59 @@ const createBooking = async (req, res) => {
       status: data.status,
       vehicleId: data.vehicleId,
       destination: data.destination,
-      model: data.destination,
+      model: data.model
     });
 
     const response = await newBooking.save();
+    // Send email to the user
+    const emailContent = `Dear user, your seat booking details are as follows:
+      Seat: ${data.seat}
+      Booking ID: ${data.booking_id}
+      User ID: ${data.user_id}
+      Date: ${data.date}
+      Time: ${data.time}
+      Status: ${data.status}
+      Vehicle ID: ${data.vehicleId}
+      Destination: ${data.destination}
+      model:${data.model}`;
+const task="Booking seat Confirmation";
+    emailSender(email, emailContent,task);
 
-    return res.status(200).json({
-      message: "Seat book created successfully",
+    res.status(200).json({
+      message: "Seat booking created successfully",
       data: response,
       error: null,
     });
   } catch (error) {
-    console.log("Error occurred: ", error);
+    console.log("Error occurred:", error);
     res.status(500).json({
       message: "Failed to save data. Error occurred.",
-      error: error,
+      error,
       data: null,
     });
   }
 };
 
+export default createBooking;
+
 //delete Booking
 const deleteBooking = async (req, res) => {
   try {
-    let bookingId = req.query.id;
+    let bookingId = req.params.id;
+    const { email } = req.user;
 
     let booking = await bookingSeatModel.find({ _id: bookingId });
     if (booking.length == 0) {
-      res.status(404).json({
+      return res.status(404).json({
         message: "Booking not found",
         data: null,
         error: null,
       });
     } else {
       let deletionResult = await bookingSeatModel.deleteOne({ _id: bookingId });
-
-      res.status(200).json({
+      const task="Delete Booked Seat Confirmation";
+      emailSender(email, deletionResult,task);
+      return res.status(200).json({
         message: "Vehicle deleted successfully",
         data: deletionResult,
         error: null,
@@ -57,7 +73,7 @@ const deleteBooking = async (req, res) => {
     }
   } catch (error) {
     console.log("Error occurred while deleting: ", error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to delete booking. Error occurred.",
       error: error,
       data: null,
@@ -68,28 +84,34 @@ const deleteBooking = async (req, res) => {
 // //update Booking
 const changeBooking = async (req, res) => {
   try {
-    let bookingId = req.query.id;
+    let bookingId = req.params.id;
+    const { email } = req.user;
     let data = req.body;
-    let booking = await bookingSeatModel.findById(bookingId);
+    let booking = await bookingSeatModel.find({_id:bookingId});
 
-    if (!booking) {
-      return res.sendStatus(404);
+    if (booking.length==0) {
+      return res.status(404).json({
+        message:"Booked seat trying to update not found",
+        error:"Booked seat not found"
+      });
     }
-
+  else{
     let updatedBooking = await bookingSeatModel.findOneAndUpdate(
       { _id: bookingId },
       { $set: data },
-      { new: true } // To get the updated vehicle in the response
+     // To get the updated vehicle in the response
     );
-
-    res.status(200).json({
-      message: "Book updated successfully",
+    const task="Changing Booked seat Confirmation";
+    emailSender(email, updatedBooking,task);
+    return res.status(200).json({
+      message: "Booked seat updated successfully",
       data: updatedBooking,
       error: null,
     });
+  }
   } catch (error) {
     console.log("Error occurred: ", error);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to update vehicle. Error occurred.",
       error: error,
       data: null,

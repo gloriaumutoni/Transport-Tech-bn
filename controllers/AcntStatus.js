@@ -65,10 +65,7 @@ const activateAccount = async (req, res) => {
             }
         });
 
-
-
-
-
+      
 
 
     } catch (error) {
