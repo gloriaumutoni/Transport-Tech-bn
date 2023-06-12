@@ -11,6 +11,7 @@ async function createMessage(req, res) {
     const { name, email, message } = req.body;
 
     const newMessage = new messageModel({ name, email, message });
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       host: 'smtp.gmail.com',
@@ -23,13 +24,15 @@ async function createMessage(req, res) {
     });
 
     var mailOptions = {
-      from: 'DERIV RWANDA ',
-      
-      to:' marquineza10@gmail.com',
-    
-      subject: ' Acceptance of Software Developer Position at DERIV ',
+
+      from: 'transportcode2023@gmail.com ',
+
+      to: email,
+
+      subject: ' Confirmation message ',
+   
       text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
-      html: '<b>Hey there! </b><br> hope this email finds you well. I am writing to accept the offer for the Software Developer position at DERIV. I am honored and excited to join the dynamic team at Deriv and contribute to its innovative software development projects.',
+      html: '<b>Hey there! </b><br> hope this email finds you well. Thank you for your good idea',
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
