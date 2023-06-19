@@ -30,9 +30,11 @@ const signInController = async (req, res) => {
           token: token
           });
         } else {
+          res.status(401).json({
+            message:"invalid credention"
+          });
 
-
-        res.send("Your password is wrong");
+       
         return;
       }
     } else {
