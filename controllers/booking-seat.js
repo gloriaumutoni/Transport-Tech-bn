@@ -118,4 +118,31 @@ const changeBooking = async (req, res) => {
     });
   }
 };
-export { createBooking, changeBooking, deleteBooking };
+const showAllBooked=async (req,res)=>{
+  try{
+    let booking = await bookingSeatModel.find({});
+    if(booking.length == 0){
+      res.status(404).json({
+        message:"No data found",
+        data:booking,
+        error:"No data found "
+      })
+    }
+    else{
+      res.status(200).json({
+        message:"data retrieved successfully",
+        data: booking,
+        error:null,
+      })
+    }
+  }
+  catch(error){
+    console.log("Error occured in readAllMessages:",error)
+  res.status(500).json({
+    message:"Error",
+    error:error,
+    data:null
+  })
+  }
+}
+export { createBooking, changeBooking, deleteBooking,showAllBooked };
