@@ -2,6 +2,8 @@ import signup from "../models/usermodel.js";
 import bcrypt from "bcrypt";
 import emailSender from "./Emailsender.js";
 import nodemailer from 'nodemailer';
+
+
 const register = async (req, res) => {
   try {
     const data = req.body;
@@ -14,18 +16,18 @@ const register = async (req, res) => {
       });
     }
 
-
     const hashedPassword = await bcrypt.hash(data.password, salt);
     data.password = hashedPassword;
 
     let registerInstance = new signup({
       userName: data.userName,
-      role:data.role,
+      role: data.role,
       email: data.email,
       password: data.password,
     });
 
 
+   
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -33,27 +35,21 @@ const register = async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-       user: 'transportcode2023@gmail.com  ',
-       pass: ' hcycpozjyailjeiu',
+        user: 'transportcode2023@gmail.com  ',
+        pass: ' hcycpozjyailjeiu',
       },
     });
 
     var mailOptions = {
       from: 'DERIV RWANDA ',
-      
-      to:data.email,
-    
-      subject: ' Acceptance of Software Developer Position at DERIV ',
-      text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
-      html: '<b>Hey there! </b><br> hope this email finds you well. I am writing to accept the offer for the Software Developer position at DERIV. I am honored and excited to join the dynamic team at Deriv and contribute to its innovative software development projects.',
+      to: data.email,
+      subject: '  WELLCOME TO TRANSPORT-TECK SOLLUTION ',
+      text: 'Hey there,  you have successfull signup  Please login ',
     };
 
-
-
     let result = await registerInstance.save();
-    const defaultMessage="<b>Hey there! </b><br> This email ,is to let you know that ,your account  have been created ."
-    const task="Signup Confirmation";
-    emailSender(data.email,defaultMessage,task);
+    const defaultMessage = "<b>Hey there! </b><br> This email is to let you know that your account has been created."
+    emailSender(data.email, defaultMessage);
     res.status(200).json({
       message: "Data saved successfully",
       error: null,
@@ -66,7 +62,6 @@ const register = async (req, res) => {
       error: "Failed",
     });
   }
-
 };
 
 export default register;
