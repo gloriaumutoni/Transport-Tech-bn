@@ -38,6 +38,9 @@ const bookingSeatModel = new mongoose.Schema({
   },
   model:{
     type: String
+  },
+  userName:{
+    type:String
   }
 });
 
