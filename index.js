@@ -74,7 +74,7 @@ app.use("/api/v2", createUser);
 
 app.use("/server", routes);
 
-const port = 3100;
+const port = 3200;
 
 
 

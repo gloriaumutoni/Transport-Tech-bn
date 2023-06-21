@@ -4,6 +4,8 @@ const createBooking = async (req, res) => {
   try {
     const data = req.body;
     const { email } = req.user;
+    
+  
     const newBooking = new bookingSeatModel({
       seat: data.seat,
       booking_id: data.booking_id,
@@ -13,7 +15,8 @@ const createBooking = async (req, res) => {
       status: data.status,
       vehicleId: data.vehicleId,
       destination: data.destination,
-      model: data.model
+      model: data.model,
+      userName:data.userName
     });
 
     const response = await newBooking.save();
@@ -36,6 +39,7 @@ const task="Booking seat Confirmation";
       data: response,
       error: null,
     });
+
   } catch (error) {
     console.log("Error occurred:", error);
     res.status(500).json({
@@ -145,4 +149,5 @@ const showAllBooked=async (req,res)=>{
   })
   }
 }
+
 export { createBooking, changeBooking, deleteBooking,showAllBooked };
