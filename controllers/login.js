@@ -9,7 +9,7 @@ const signInController = async (req, res) => {
   try {
     const data = req.body;
 
-    const { email, password } = data;
+    const { email, password} = data;
     let token;
 
     const user = await SignUp.findOne({ email });
@@ -19,7 +19,8 @@ const signInController = async (req, res) => {
 
       let payload ={
         id: user._id,
-        email:user.email
+        email:user.email,
+        role:user.role
       }
       if (isPasswordValid) {
 
