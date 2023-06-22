@@ -36,7 +36,7 @@ const assignRole = async (req, res) => {
 const getAllRoles = async (req, res) => {
   try {
     let data = req.body;
-    let role = data.role;
+    let role = req.query.role;
     //pass the role in the body 
     let response = await userModel.find({ role: role });
     if (response.length == 0) {

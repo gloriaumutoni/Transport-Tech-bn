@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 import gpsModel from "../controllers/gpsController.js";
+
 import GPS from "../controllers/gpsController.js";
 
 

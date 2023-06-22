@@ -1,17 +1,15 @@
-
-
 import SignUp from "../models/usermodel.js";
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 console.log("welcome");
 
+
 const signInController = async (req, res) => {
   try {
     const data = req.body;
 
-    const { email, password } = data;
+    const { email, password} = data;
     let token;
 
     const user = await SignUp.findOne({ email });
@@ -19,15 +17,25 @@ const signInController = async (req, res) => {
     if (user) {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
+      let payload ={
+        id: user._id,
+        email:user.email,
+        role:user.role
+      }
       if (isPasswordValid) {
-        token = jwt.sign({ id: user._id }, "yourSecretKey");
-        res.status(200).json({
-          message: "token is",
-        token:token
-        });
-        
-      } else {
-        res.send("Your password is wrong");
+
+
+          token = jwt.sign(payload, "yourSecretKey");
+          res.status(200).json({
+          message: "Token is",
+          token: token
+          });
+        } else {
+          res.status(401).json({
+            message:"invalid credention"
+          });
+
+       
         return;
       }
     } else {
@@ -44,5 +52,6 @@ const signInController = async (req, res) => {
     });
   }
 };
+
 
 export default signInController;

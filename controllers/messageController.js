@@ -1,7 +1,10 @@
 // controllers/messageController.js
 
 import messageModel from "../models/messageModol.js";
+
+
 import nodemailer from 'nodemailer';
+
 
 async function createMessage(req, res) {
   try {
@@ -15,17 +18,19 @@ async function createMessage(req, res) {
       port: 465,
       secure: true,
       auth: {
-        user: 'transportcode2023@gmail.com  ',
-        pass: ' hcycpozjyailjeiu',
+       user: 'transportcode2023@gmail.com  ',
+       pass: ' hcycpozjyailjeiu',
       },
     });
 
     var mailOptions = {
+
       from: 'transportcode2023@gmail.com ',
 
       to: email,
 
       subject: ' Confirmation message ',
+   
       text: 'Hey there, it’s our first message sent with Nodemailer 😉 ',
       html: '<b>Hey there! </b><br> hope this email finds you well. Thank you for your good idea',
     };
@@ -37,7 +42,14 @@ async function createMessage(req, res) {
         console.log('Message sent: %s', info.messageId);
       }
     });
+
+
     await newMessage.save();
+    
+
+
+
+
     res
       .status(200)
       .json({ message: "Message saved successfully", data: newMessage });
