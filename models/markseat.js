@@ -8,23 +8,31 @@ const seatSchema = new Schema({
     type: String,
     required: true,
   },
+  from: {
+    type: String,
+    required: true,
+  },
+  destination: {
+    type: String,
+    required: true,
+  },
   seatNumber: {
     type: String,
     required: true,
     unique: true,
   },
-  bookingDate: {
+  bookingTime: {
     type: Date,
     required: true,
   },
-  
-seatServed: {
+
+  seatServed: {
     type: Boolean,
     default: true,
-    
+
   },
 });
 
-const Seat = mongoose.model('Seat', seatSchema);
+const Seats = mongoose.model('Seat', seatSchema);
 
-export default Seat;
+export default Seats;
