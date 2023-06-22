@@ -117,4 +117,7 @@ const getByEmail = async (req, res) => {
   }
 };
 
+
+
+
 export { assignRole, getAllRoles, getByEmail, getAllUsers };
