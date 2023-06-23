@@ -15,6 +15,9 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.use(cookieParser());
 
+
+router.post("/signup", signup);
+router.get("/login", login);
 router.post("/create", createRoute);
 router.patch("/change", changeRoute);
 router.delete("/delete", deleteRoute);

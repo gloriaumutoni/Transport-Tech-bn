@@ -9,7 +9,9 @@ const signInController = async (req, res) => {
   try {
     const data = req.body;
 
-    const { email, password} = data;
+    const { email, password } = data;
+
+
     let token;
 
     const user = await SignUp.findOne({ email });
@@ -23,8 +25,6 @@ const signInController = async (req, res) => {
         role:user.role
       }
       if (isPasswordValid) {
-
-
           token = jwt.sign(payload, "yourSecretKey");
           res.status(200).json({
           message: "Token is",
@@ -36,6 +36,7 @@ const signInController = async (req, res) => {
           });
 
        
+
         return;
       }
     } else {
