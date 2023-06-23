@@ -16,6 +16,4 @@ router.post("/create", createVehicle);
 router.patch("/change", changeVehicle);
 router.delete("/delete", deleteVehicle);
 
-//
-
 export default router;
