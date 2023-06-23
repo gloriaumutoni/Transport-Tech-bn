@@ -23,8 +23,10 @@ const tokenMiddleware = (req, res, next) => {
 
     const email = decryptedToken.email;
     req.email = email;
+    const role= decryptedToken.role
+    console.log("relo:", role)
 
-    if (email !== 'alainmanzi71@gmail.com') {
+    if (role !== 'Admin') {
       return res.status(403).json({ message: 'You are not authorized to access this resource'});
     }
 
