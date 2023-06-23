@@ -1,8 +1,6 @@
 // controllers/messageController.js
 
 import messageModel from "../models/messageModol.js";
-
-
 import nodemailer from 'nodemailer';
 
 
@@ -11,6 +9,7 @@ async function createMessage(req, res) {
     const { name, email, message } = req.body;
 
     const newMessage = new messageModel({ name, email, message });
+
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -44,9 +43,9 @@ async function createMessage(req, res) {
     });
 
 
+
     await newMessage.save();
     
-
 
 
 
