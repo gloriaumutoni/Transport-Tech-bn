@@ -36,6 +36,12 @@ const bookingSeatModel = new mongoose.Schema({
     // type: Schema.Types.ObjectId,
     ref: "vehicle",
   },
+  model:{
+    type: String
+  },
+  userName:{
+    type:String
+  }
 });
 
 export default mongoose.model("Booking seat", bookingSeatModel);

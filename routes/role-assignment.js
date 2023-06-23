@@ -14,4 +14,5 @@ router.patch("/assign", assignRole);
 router.get("/readAll", getAllRoles);
 router.get("/readAllUsers", getAllUsers);
 router.get("/read", getByEmail);
+
 export default router;

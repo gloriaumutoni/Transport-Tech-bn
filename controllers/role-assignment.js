@@ -37,7 +37,7 @@ const getAllRoles = async (req, res) => {
   try {
     let data = req.body;
     let role = req.query.role;
-    //pass the role in the body
+
     let response = await userModel.find({ role: role });
     if (response.length == 0) {
       res.status(404).json({
@@ -52,6 +52,7 @@ const getAllRoles = async (req, res) => {
         error: null,
       });
     }
+
   } catch (error) {
     console.log("Error occurred: ", error);
     res.status(500).json({
@@ -78,6 +79,7 @@ const getAllUsers = async (req, res) => {
         error: null,
       });
     }
+
   } catch (error) {
     console.log("Error occurred: ", error);
     res.status(500).json({

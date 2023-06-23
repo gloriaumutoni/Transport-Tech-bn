@@ -1,3 +1,5 @@
+
+
 import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -16,8 +18,16 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     required: false,
-    default: "user",
+    default:"user"
+    
   },
+  status: {
+    type: String,
+    required: false,
+    default: "Active",
+  }
 });
 
 export default mongoose.model("User", UserSchema);
+
+
